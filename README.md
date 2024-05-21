@@ -15,7 +15,7 @@ LongDocFACTScore is a reference-free framework which can be applied to any refer
 
 
 
-### Usage
+### Usage LDFACTS
 
 To run on a piece of text:
 ```
@@ -34,3 +34,20 @@ To run with some example data:
 pip install -r requirements.txt
 python run_example.py
 ```
+
+
+
+### Repeat evaluation scripts
+
+#### Set up 
+
+1. Run the following
+```bash
+pip install -r requirements.txt
+cd src
+git clone https://github.com/ThomasScialom/QuestEval.git
+git clone https://github.com/neulab/BARTScore.git
+git clone https://github.com/salesforce/factCC.git 
+cp ./factcc_run.py ./factCC/modeling/run.py
+```
+2. Download the factCC trained checkpoint for evaluation and copy into the top level of this repo in a folder called `factcc-checkpoint`
