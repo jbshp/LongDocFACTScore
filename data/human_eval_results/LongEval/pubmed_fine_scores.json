@@ -1,0 +1,322 @@
+[
+    {
+        "story": "article_0_bigbird_pegasus",
+        "score": [
+            66.66666666666667,
+            61.111111111111114,
+            66.66666666666667
+        ]
+    },
+    {
+        "story": "article_0_longt5",
+        "score": [
+            76.92307692307692,
+            84.61538461538461,
+            100.0
+        ]
+    },
+    {
+        "story": "article_10_bigbird_pegasus",
+        "score": [
+            41.666666666666664,
+            37.5,
+            62.5
+        ]
+    },
+    {
+        "story": "article_10_longt5",
+        "score": [
+            46.666666666666664,
+            60.0,
+            93.33333333333333
+        ]
+    },
+    {
+        "story": "article_11_bigbird_pegasus",
+        "score": [
+            41.666666666666664,
+            50.0,
+            50.0
+        ]
+    },
+    {
+        "story": "article_11_longt5",
+        "score": [
+            50.0,
+            50.0,
+            50.0
+        ]
+    },
+    {
+        "story": "article_12_bigbird_pegasus",
+        "score": [
+            0.0,
+            33.333333333333336,
+            100.0
+        ]
+    },
+    {
+        "story": "article_12_longt5",
+        "score": [
+            100.0,
+            100.0,
+            100.0
+        ]
+    },
+    {
+        "story": "article_13_bigbird_pegasus",
+        "score": [
+            20.0,
+            35.0,
+            25.0
+        ]
+    },
+    {
+        "story": "article_13_longt5",
+        "score": [
+            90.0,
+            90.0,
+            100.0
+        ]
+    },
+    {
+        "story": "article_14_bigbird_pegasus",
+        "score": [
+            83.33333333333333,
+            33.333333333333336,
+            33.333333333333336
+        ]
+    },
+    {
+        "story": "article_14_longt5",
+        "score": [
+            100.0,
+            100.0,
+            50.0
+        ]
+    },
+    {
+        "story": "article_15_bigbird_pegasus",
+        "score": [
+            100.0,
+            100.0,
+            100.0
+        ]
+    },
+    {
+        "story": "article_15_longt5",
+        "score": [
+            85.71428571428571,
+            71.42857142857143,
+            85.71428571428571
+        ]
+    },
+    {
+        "story": "article_16_bigbird_pegasus",
+        "score": [
+            76.92307692307692,
+            76.92307692307692,
+            84.61538461538461
+        ]
+    },
+    {
+        "story": "article_16_longt5",
+        "score": [
+            55.55555555555556,
+            77.77777777777777,
+            66.66666666666667
+        ]
+    },
+    {
+        "story": "article_17_bigbird_pegasus",
+        "score": [
+            60.0,
+            90.0,
+            90.0
+        ]
+    },
+    {
+        "story": "article_17_longt5",
+        "score": [
+            37.5,
+            75.0,
+            62.5
+        ]
+    },
+    {
+        "story": "article_18_bigbird_pegasus",
+        "score": [
+            35.714285714285715,
+            78.57142857142857,
+            57.142857142857146
+        ]
+    },
+    {
+        "story": "article_18_longt5",
+        "score": [
+            63.63636363636363,
+            72.72727272727273,
+            72.72727272727273
+        ]
+    },
+    {
+        "story": "article_19_bigbird_pegasus",
+        "score": [
+            42.857142857142854,
+            33.333333333333336,
+            42.857142857142854
+        ]
+    },
+    {
+        "story": "article_19_longt5",
+        "score": [
+            55.55555555555556,
+            88.88888888888889,
+            44.44444444444444
+        ]
+    },
+    {
+        "story": "article_1_bigbird_pegasus",
+        "score": [
+            100.0,
+            100.0,
+            100.0
+        ]
+    },
+    {
+        "story": "article_1_longt5",
+        "score": [
+            100.0,
+            100.0,
+            100.0
+        ]
+    },
+    {
+        "story": "article_2_bigbird_pegasus",
+        "score": [
+            87.5,
+            100.0,
+            100.0
+        ]
+    },
+    {
+        "story": "article_2_longt5",
+        "score": [
+            100.0,
+            100.0,
+            100.0
+        ]
+    },
+    {
+        "story": "article_3_bigbird_pegasus",
+        "score": [
+            75.0,
+            56.25,
+            75.0
+        ]
+    },
+    {
+        "story": "article_3_longt5",
+        "score": [
+            60.0,
+            100.0,
+            100.0
+        ]
+    },
+    {
+        "story": "article_4_bigbird_pegasus",
+        "score": [
+            40.0,
+            80.0,
+            60.0
+        ]
+    },
+    {
+        "story": "article_4_longt5",
+        "score": [
+            100.0,
+            100.0,
+            83.33333333333333
+        ]
+    },
+    {
+        "story": "article_5_bigbird_pegasus",
+        "score": [
+            86.95652173913044,
+            86.95652173913044,
+            86.95652173913044
+        ]
+    },
+    {
+        "story": "article_5_longt5",
+        "score": [
+            71.42857142857143,
+            100.0,
+            100.0
+        ]
+    },
+    {
+        "story": "article_6_bigbird_pegasus",
+        "score": [
+            50.0,
+            35.0,
+            52.63157894736842
+        ]
+    },
+    {
+        "story": "article_6_longt5",
+        "score": [
+            100.0,
+            86.36363636363636,
+            95.45454545454545
+        ]
+    },
+    {
+        "story": "article_7_bigbird_pegasus",
+        "score": [
+            69.23076923076923,
+            69.23076923076923,
+            76.92307692307692
+        ]
+    },
+    {
+        "story": "article_7_longt5",
+        "score": [
+            88.88888888888889,
+            94.44444444444444,
+            100.0
+        ]
+    },
+    {
+        "story": "article_8_bigbird_pegasus",
+        "score": [
+            61.111111111111114,
+            55.55555555555556,
+            55.55555555555556
+        ]
+    },
+    {
+        "story": "article_8_longt5",
+        "score": [
+            94.44444444444444,
+            94.44444444444444,
+            100.0
+        ]
+    },
+    {
+        "story": "article_9_bigbird_pegasus",
+        "score": [
+            71.42857142857143,
+            78.57142857142857,
+            78.57142857142857
+        ]
+    },
+    {
+        "story": "article_9_longt5",
+        "score": [
+            92.5925925925926,
+            96.29629629629629,
+            100.0
+        ]
+    }
+]
