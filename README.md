@@ -19,7 +19,7 @@ LongDocFACTScore is a reference-free framework which can be applied to any refer
 
 To run on a piece of text:
 ```
-from src.ldfacts import LDFACTS
+from longdocfactscore import LDFACTS
 
 predict_summary = "INSERT PREDICTED SUMMARY HERE"
 src_doc = "INSERT SOURCE DOCUMENT HERE"
@@ -31,23 +31,31 @@ scores = ldfacts_scorer.score_src_hyp_long([src_doc],[predict_summary])
 
 To run with some example data:
 ```bash
-pip install -r requirements.txt
+pip install -e . 
 python run_example.py
 ```
 
 
 
-### Repeat evaluation scripts
+### Repeat evaluation in paper
 
 #### Set up 
 
 1. Run the following
 ```bash
-pip install -r requirements.txt
-cd src
+pip install -e .
+cd evaluation_scripts
 git clone https://github.com/ThomasScialom/QuestEval.git
 git clone https://github.com/neulab/BARTScore.git
 git clone https://github.com/salesforce/factCC.git 
 cp ./factcc_run.py ./factCC/modeling/run.py
 ```
 2. Download the factCC trained checkpoint for evaluation and copy into the top level of this repo in a folder called `factcc-checkpoint`
+3. Run scripts, dataset options are: `pubmed_longdocfactscore` , `arxiv_longdocfactscore`, `pubmed_longdocfactscore` 
+
+e.g., 
+
+```bash 
+python evaluation_scripts/run_evaluation.py --dataset pubmed_longdocfactscore
+```
+
