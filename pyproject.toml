@@ -17,7 +17,8 @@ dependencies = [
     "numpy",
     "sentence-transformers",
     "torch",
-    "transformers"
+    "transformers",
+    "pandas"
 ]
 [project.urls]
 Homepage = "https://github.com/jbshp/LongDocFACTScore"

@@ -17,6 +17,7 @@ from nltk import sent_tokenize
 import subprocess
 import time
 import os
+import seaborn as sb
 
 
 def timeit(func):
@@ -398,8 +399,6 @@ def get_scores_from_metrics(df, src_cols):
         switch_tgt=True,
         src_cols=src_cols,
     )
-    #     df =  update_df_with_metric_scores(df,get_bartscore_row,metric_name="bartscore_prec",tgt_col="ref",src_cols=src_cols)
-    #     df =  update_df_with_metric_scores(df,get_bartscore_row,metric_name="bartscore_recall",tgt_col="ref",switch_tgt=True,src_cols=src_cols)
     df = update_df_with_metric_scores(
         df,
         get_ldfacts_row,
@@ -424,7 +423,7 @@ def get_scores_from_metrics(df, src_cols):
 
 if __name__ == "__main__":
 
-    if "long" in args.dataset:
+    if "longdocfactscore" in args.dataset:
 
         # load data
         dfs, raw_path = load_dataframes(args.dataset)
