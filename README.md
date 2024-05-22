@@ -11,11 +11,16 @@ Maintaining factual consistency is a critical issue in abstractive text summaris
 
 LongDocFACTScore is a reference-free framework which can be applied to any reference-free metric for assessing factual consistency. In this repo, it is implemented with BARTScore. The method uses sentence embeddings to calculate similarity between source document sentences and predicted summary sentences, and then applies metrics to the highest similarity text snippets. The scores per sentence in the predicted summary are averaged to give one score per predicted summary. 
 
+In this work, LongDocFACTScore is implemented with [BARTScore](https://github.com/neulab/BARTScore), and some code is copied from the linked repo. 
+
 <img src="ldfacts.png" width="400">
 
 
+### Data sets (including LongSciVerify)
 
-### Usage LDFACTS
+In our work, we curate LongSciVerify data set consisting of PubMed and ArXiv papers with human annotations of factual consistency. More information about the data sets we use can be found [here](./data/README.md)
+
+### Usage of LongDocFACTScore
 
 To run on a piece of text:
 ```
@@ -37,7 +42,7 @@ python run_example.py
 
 
 
-### Repeat evaluation in paper
+### Repeat evaluation in LongDocFACTScore paper
 
 #### Set up 
 
