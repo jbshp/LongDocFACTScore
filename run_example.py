@@ -1,4 +1,4 @@
-from longdocfactscore.ldfacts import LDFACTS
+from longdocfactscore.ldfacts import LongDocFACTScore
 
 text_1 = " On 24th October, there were 120 students attending the class about maths."
 text_2 = "On 23rd October, there were 120 students attending the class about physics."
@@ -7,7 +7,7 @@ text_2 = "On 23rd October, there were 120 students attending the class about phy
 with open("./data/raw_data/example_text_file.txt") as f:
     source_text = f.read()
 
-ldfacts_scorer = LDFACTS(device="cpu")
+ldfacts_scorer = LongDocFACTScore(device="cpu")
 
 print(f"\nThe source text is: \n\n{source_text}\n")
 

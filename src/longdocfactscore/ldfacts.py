@@ -7,7 +7,7 @@ from nltk import sent_tokenize
 from sentence_transformers import SentenceTransformer, util
 
 
-class LDFACTS():
+class LongDocFACTScore():
     def __init__(self, device="cuda:0", model="BARTScore"):
         self.sent_model = SentenceTransformer("bert-base-nli-mean-tokens")
         self.sent_model.to(device)

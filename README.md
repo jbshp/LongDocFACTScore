@@ -24,12 +24,12 @@ In our work, we curate LongSciVerify data set consisting of PubMed and ArXiv pap
 
 To run on a piece of text:
 ```
-from longdocfactscore import LDFACTS
+from longdocfactscore import LongDocFACTScore
 
 predict_summary = "INSERT PREDICTED SUMMARY HERE"
 src_doc = "INSERT SOURCE DOCUMENT HERE"
 
-ldfacts_scorer = LDFACTS(device='cpu')
+ldfacts_scorer = LongDocFACTScore(device='cpu')
 
 scores = ldfacts_scorer.score_src_hyp_long([src_doc],[predict_summary])
 ```

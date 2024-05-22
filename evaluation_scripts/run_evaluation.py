@@ -6,9 +6,9 @@ from utils.correlations import (
     interval_metric,
     kendal_tau_matrix,
 )
-from utils.metrics import test_huggingface_rouge, test_bert_score, test_questeval
+from utils.metrics import test_huggingface_rouge, test_questeval
 import argparse
-from longdocfactscore import LDFACTS
+from longdocfactscore import LongDocFACTScore
 from utils.preprocess import clean_abstract
 from BARTScore.bart_score import BARTScorer
 from bert_score.scorer import BERTScorer
@@ -31,7 +31,7 @@ def timeit(func):
 
 
 # load models
-ldfacts_scorer = LDFACTS(checkpoint="facebook/bart-large")
+ldfacts_scorer = LongDocFACTScore(checkpoint="facebook/bart-large")
 bart_scorer = BARTScorer(checkpoint="facebook/bart-large", device="cpu")
 bert_scorer = BERTScorer("bert-base-uncased", device="cpu")
 

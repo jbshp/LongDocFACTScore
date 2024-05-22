@@ -168,7 +168,7 @@ def kendal_tau_matrix(df):
     df_new = pd.read_csv(tmp_csv)
     df_new = df_new.rename(
         columns={
-            "ldfacts_src_hyp": "LDFACTS",
+            "ldfacts_src_hyp": "LongDocFACTScore",
             "rouge_rouge_1_f_score": "ROUGE-1",
             "bertscore": "BERTScore",
             "factuality": "Human",
@@ -189,7 +189,7 @@ def kendal_tau_matrix(df):
         "QuestEval",
         "FactCC",
         "BARTScore",
-        "LDFACTS",
+        "LongDocFACTScore",
     ]
     df_new = df_new[cols]
     columns = df_new.columns
