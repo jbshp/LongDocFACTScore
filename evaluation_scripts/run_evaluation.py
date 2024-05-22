@@ -182,20 +182,6 @@ def load_dataframes(dataset):
         return df
 
 
-def run_interannotator_agreement(dfs):
-    score_coh = calculate_inter_annotator_agreement_fluency_coherence_krippendorff(
-        data_frames=dfs, col="coherence"
-    )
-    score_flu = calculate_inter_annotator_agreement_fluency_coherence_krippendorff(
-        data_frames=dfs, col="fluency"
-    )
-    score_fac = calculate_inter_annotator_agreement_factuality_krippendorff(dfs)
-    print(
-        f"\nKrippendorf-alpha IAA. Fluency: {score_flu}, Coherence: {score_coh}, Factuality: {score_fac}"
-    )
-    return
-
-
 def average_scores_accross_annnotators(dfs):
     for idx, df in enumerate(dfs):
         for model in ["1", "2", "3"]:
@@ -228,24 +214,6 @@ def average_scores_accross_annnotators(dfs):
     df_all_annotators = df_all_annotators.join(scores)
     return df_all_annotators
 
-
-def get_overall_model_performance(df):
-    print("\nOverall summarisation model scores:")
-    mean = df[
-        [
-            "model_1_coherence",
-            "model_2_coherence",
-            "model_3_coherence",
-            "model_1_fluency",
-            "model_2_fluency",
-            "model_3_fluency",
-            "model_1_factuality",
-            "model_2_factuality",
-            "model_3_factuality",
-        ]
-    ].mean()
-    print(mean)
-    return
 
 
 def get_rouge_row(df, col_input, col_output, tgt_col):
@@ -434,14 +402,8 @@ if __name__ == "__main__":
         # load data
         dfs, raw_path = load_dataframes(args.dataset)
 
-        # calculate interannotator agreement
-        run_interannotator_agreement(dfs)
-
         # average scores across annotators for each example
         df_all = average_scores_accross_annnotators(dfs)
-
-        # get overall model performance
-        get_overall_model_performance(df_all)
 
         # get raw data
         df_all = load_raw_data(df_all, raw_path)
