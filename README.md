@@ -54,8 +54,7 @@ git clone https://github.com/ThomasScialom/QuestEval.git
 git clone https://github.com/neulab/BARTScore.git
 git clone https://github.com/salesforce/factCC.git 
 cp ./utils/factcc_run.py ./factCC/modeling/run.py
-cd ..
-bash evaluation_scripts/install_requirements.sh
+pip install -r requirements.txt
 ```
 2. Download the factCC trained checkpoint for evaluation and copy into the top level of this repo in a folder called `factcc-checkpoint`
 3. Run scripts, dataset options are: `pubmed_longdocfactscore` , `arxiv_longdocfactscore`, `pubmed_longdocfactscore` 
@@ -63,6 +62,7 @@ bash evaluation_scripts/install_requirements.sh
 e.g., 
 
 ```bash 
+cd ..
 python evaluation_scripts/run_evaluation.py --dataset pubmed_longdocfactscore
 ```
 
