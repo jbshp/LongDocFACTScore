@@ -5,7 +5,8 @@ from copy import deepcopy
 import re
 import os
 
-tmp_csv = 'output.csv'
+tmp_csv = "output.csv"
+
 
 def fleiss_kappa(M):
     """Computes Fleiss' kappa for group of annotators.
@@ -145,10 +146,9 @@ def krippendorff_alpha(
     return round_2dp(1.0 - Do / De if (Do and De) else 1.0)
 
 
-
 def get_df(df):
-    cols = [col for col in df.columns if col.startswith('model_')]
-    metrics = set([re.sub("model_[0-9]_","",col) for col in cols])
+    cols = [col for col in df.columns if col.startswith("model_")]
+    metrics = set([re.sub("model_[0-9]_", "", col) for col in cols])
     df_new = pd.DataFrame(columns=list(metrics))
     for metric in metrics:
         cols_for_metric = [col_name for col_name in df.columns if metric in col_name]
@@ -156,29 +156,51 @@ def get_df(df):
         for col_for_metric in cols_for_metric:
             scores.append(list(df[col_for_metric]))
         scores = [item for sublist in scores for item in sublist]
-        df_new.loc[:,metric] = scores
-    df_new  = df_new.reset_index(drop=True)
-    df_new.to_csv(tmp_csv,index=None)
-    
+        df_new.loc[:, metric] = scores
+    df_new = df_new.reset_index(drop=True)
+    df_new.to_csv(tmp_csv, index=None)
+
     return
- 
+
 
 def kendal_tau_matrix(df):
     df_new = get_df(df)
     df_new = pd.read_csv(tmp_csv)
-    df_new = df_new.rename(columns={'ldfacts_src_hyp':"LDFACTS", 'rouge_rouge_1_f_score':"ROUGE-1", 'bertscore':"BERTScore", 'factuality':"Human",
-       'rouge_rouge_2_f_score':"ROUGE-2", 'bartscore_src_hyp': "BARTScore", 'rouge_rouge_l_f_score':"ROUGE-L",
-       'questeval':"QuestEval", 'factcc':"FactCC"})
-    df_new = df_new.drop(columns=['coherence','fluency'])
-    cols = ["Human","ROUGE-1","ROUGE-2","ROUGE-L","BERTScore","QuestEval","FactCC","BARTScore","LDFACTS"]
+    df_new = df_new.rename(
+        columns={
+            "ldfacts_src_hyp": "LDFACTS",
+            "rouge_rouge_1_f_score": "ROUGE-1",
+            "bertscore": "BERTScore",
+            "factuality": "Human",
+            "rouge_rouge_2_f_score": "ROUGE-2",
+            "bartscore_src_hyp": "BARTScore",
+            "rouge_rouge_l_f_score": "ROUGE-L",
+            "questeval": "QuestEval",
+            "factcc": "FactCC",
+        }
+    )
+    df_new = df_new.drop(columns=["coherence", "fluency"])
+    cols = [
+        "Human",
+        "ROUGE-1",
+        "ROUGE-2",
+        "ROUGE-L",
+        "BERTScore",
+        "QuestEval",
+        "FactCC",
+        "BARTScore",
+        "LDFACTS",
+    ]
     df_new = df_new[cols]
     columns = df_new.columns
-    kendalltau_matrix = np.zeros(shape=(len(columns),len(columns)))
+    kendalltau_matrix = np.zeros(shape=(len(columns), len(columns)))
     for idx1, col_n_1 in enumerate(df_new.columns):
         for idx2, col_n_2 in enumerate(df_new.columns):
             df_new_2 = deepcopy(df_new)
             col_1 = np.array(df_new_2[col_n_1])
             col_2 = np.array(df_new_2[col_n_2])
-            kendalltau_matrix[idx1,idx2] = np.round(scipy.stats.kendalltau(col_1, col_2)[0],2) # 0 is the correlation
+            kendalltau_matrix[idx1, idx2] = np.round(
+                scipy.stats.kendalltau(col_1, col_2)[0], 2
+            )  # 0 is the correlation
     os.remove(tmp_csv)
     return df_new, kendalltau_matrix

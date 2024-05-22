@@ -19,13 +19,15 @@ import pandas as pd
 import nltk
 from nltk.translate import meteor
 from nltk import word_tokenize
-sys.path.append('./src/QuestEval/')
+
+sys.path.append("./src/QuestEval/")
 from questeval.questeval_metric import QuestEval
 
 nltk.download("punkt")
 nltk.download("wordnet")
 
 questeval = QuestEval(no_cuda=False)
+
 
 def test_huggingface_rouge(predicted_summaries, gold_summaries):
     metric = evaluate.load("rouge")
@@ -41,11 +43,11 @@ def ss(x):
     return np.round(x * 100, decimals=2)
 
 
-def test_questeval(hypothesis,sources):
+def test_questeval(hypothesis, sources):
     return list(
-        questeval.corpus_questeval(
-            hypothesis=hypothesis, 
-            sources=sources)['ex_level_scores']
+        questeval.corpus_questeval(hypothesis=hypothesis, sources=sources)[
+            "ex_level_scores"
+        ]
     )
 
 
@@ -61,10 +63,12 @@ def test_meteor(predicted_summaries, gold_summaries):
     return scores
 
 
-bert_scorer = BERTScorer('bert-base-uncased',device='cpu')
+bert_scorer = BERTScorer("bert-base-uncased", device="cpu")
+
+
 def test_bert_score(predicted_summaries, gold_summaries):
     with io.capture_output() as captured:
-        P_sci, R_sci, F1_sci = bert_scorer.score(predicted_summaries,gold_summaries)
+        P_sci, R_sci, F1_sci = bert_scorer.score(predicted_summaries, gold_summaries)
     return F1_sci
 
 
@@ -154,5 +158,3 @@ def calulate_all_metrics(our_predictions, gold_summaries, device, wandb_log=Fals
     """
     )
     return
-
-

@@ -14,9 +14,10 @@ def clean_sent(sentence):
     sentence = sentence.replace("<pad>", "")
     sentence = sentence.replace("<br />", "")
     return sentence
-    
+
+
 def clean_abstract(text_array):
-    if type(text_array)==str:
+    if type(text_array) == str:
         cleaned = clean_sent(text_array)
     else:
         cleaned = ""
