@@ -126,27 +126,27 @@ def calculate_inter_annotator_agreement_factuality_krippendorff(data_frames):
 def load_dataframes(dataset):
     if dataset == "arxiv_longdocfactscore":
         df_1 = pd.read_csv(
-            "./data/human_eval_results/LongDocFACTScore/arxiv_reviewer_1.csv"
+            "./data/human_eval_results/LongSciVerify/arxiv_reviewer_1.csv"
         )
         df_2 = pd.read_csv(
-            "./data/human_eval_results/LongDocFACTScore/arxiv_reviewer_2.csv"
+            "./data/human_eval_results/LongSciVerify/arxiv_reviewer_2.csv"
         )
         df_3 = pd.read_csv(
-            "./data/human_eval_results/LongDocFACTScore/arxiv_reviewer_3.csv"
+            "./data/human_eval_results/LongSciVerify/arxiv_reviewer_3.csv"
         )
-        raw_path = "./data/raw_data/LongDocFACTScore/arxiv_test.json"
+        raw_path = "./data/raw_data/LongSciVerify/arxiv_test.json"
         return [df_1, df_2, df_3], raw_path
     if dataset == "pubmed_longdocfactscore":
         df_1 = pd.read_csv(
-            "./data/human_eval_results/LongDocFACTScore/pubmed_reviewer_1.csv"
+            "./data/human_eval_results/LongSciVerify/pubmed_reviewer_1.csv"
         )
         df_2 = pd.read_csv(
-            "./data/human_eval_results/LongDocFACTScore/pubmed_reviewer_2.csv"
+            "./data/human_eval_results/LongSciVerify/pubmed_reviewer_2.csv"
         )
         df_3 = pd.read_csv(
-            "./data/human_eval_results/LongDocFACTScore/pubmed_reviewer_3.csv"
+            "./data/human_eval_results/LongSciVerify/pubmed_reviewer_3.csv"
         )
-        raw_path = "./data/raw_data/LongDocFACTScore/pubmed_test.json"
+        raw_path = "./data/raw_data/LongSciVerify/pubmed_test.json"
         return [df_1, df_2, df_3], raw_path
     if dataset == "pubmed_longeval":
         with open(
