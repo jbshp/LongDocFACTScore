@@ -20,7 +20,7 @@ import nltk
 from nltk.translate import meteor
 from nltk import word_tokenize
 
-sys.path.append("./src/QuestEval/")
+sys.path.append("./evaluation_scripts/QuestEval/")
 from questeval.questeval_metric import QuestEval
 
 nltk.download("punkt")
