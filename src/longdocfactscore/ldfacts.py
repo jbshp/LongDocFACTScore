@@ -2,29 +2,22 @@ import torch
 import torch.nn as nn
 import traceback
 from transformers import BartTokenizer, BartForConditionalGeneration
-from typing import List
 import numpy as np
 from nltk import sent_tokenize
 from sentence_transformers import SentenceTransformer, util
 
 
-class LDFACTS:
-    def __init__(self, device="cuda:0", checkpoint="facebook/bart-large"):
-        # Set up model
-        self.device = device
-        self.max_length = 1024
-        self.tokenizer = BartTokenizer.from_pretrained(checkpoint)
-        self.model = BartForConditionalGeneration.from_pretrained(checkpoint)
-        self.model.eval()
-        self.model.to(device)
-
-        # Set up loss
-        self.loss_fct = nn.NLLLoss(
-            reduction="none", ignore_index=self.model.config.pad_token_id
-        )
-        self.lsm = nn.LogSoftmax(dim=1)
+class LDFACTS():
+    def __init__(self, device="cuda:0", model="BARTScore"):
         self.sent_model = SentenceTransformer("bert-base-nli-mean-tokens")
         self.sent_model.to(device)
+        self.device = device
+        if model == "BARTScore":
+            self.metric = BARTScore(device=self.device)
+            self.metric_function = self.metric.bart_score
+        else:
+            raise ValueError("LongDocFACTScore currently only supports BARTScore")
+
 
     def get_surrounding_sentences(self, sentence_array, ii):
         if ii > 0 and ii < len(sentence_array) - 1:
@@ -66,8 +59,8 @@ class LDFACTS:
                 for ii in sorted_idxs[0:3]:
                     similar_sents = self.get_surrounding_sentences(src_sents, ii)
                     similar_src_sentences.append(similar_sents)
-                # calculate BARTScore for 3 most similar sections of source article
-                scores = self.bart_score(
+                # calculate metric for 3 most similar sections of source article
+                scores = self.metric_function(
                     similar_src_sentences,
                     [hyp_sentence for i in range(0, len(similar_src_sentences))],
                 )
@@ -80,7 +73,27 @@ class LDFACTS:
             all_scores.append(doc_score)
         return all_scores
 
+
+# code taken from https://github.com/neulab/BARTScore/blob/main/bart_score.py
+class BARTScore():
+    def __init__(self, device="cuda:0", checkpoint="facebook/bart-large"):
+        # Set up model
+        self.device = device
+        self.max_length = 1024
+        self.tokenizer = BartTokenizer.from_pretrained(checkpoint)
+        self.model = BartForConditionalGeneration.from_pretrained(checkpoint)
+        self.model.eval()
+        self.model.to(device)
+
+        # Set up loss
+        self.loss_fct = nn.NLLLoss(
+            reduction="none", ignore_index=self.model.config.pad_token_id
+        )
+        self.lsm = nn.LogSoftmax(dim=1)
+        
+
     def bart_score(self, srcs, tgts, batch_size=4):
+        ### Taken from 
         """Score a batch of examples"""
         score_list = []
 
@@ -126,36 +139,3 @@ class LDFACTS:
                 print(f"target: {tgt_list}")
                 exit(0)
         return score_list
-
-    def multi_ref_score(self, srcs, tgts: List[List[str]], agg="mean", batch_size=4):
-        # Assert we have the same number of references
-        ref_nums = [len(x) for x in tgts]
-        if len(set(ref_nums)) > 1:
-            raise Exception("You have different number of references per test sample.")
-
-        ref_num = len(tgts[0])
-        score_matrix = []
-        for i in range(ref_num):
-            curr_tgts = [x[i] for x in tgts]
-            scores = self.score(srcs, curr_tgts, batch_size)
-            score_matrix.append(scores)
-        if agg == "mean":
-            score_list = np.mean(score_matrix, axis=0)
-        elif agg == "max":
-            score_list = np.max(score_matrix, axis=0)
-        else:
-            raise NotImplementedError
-        return list(score_list)
-
-    def test(self, batch_size=3):
-        """Test"""
-        src_list = [
-            "This is a very good idea. Although simple, but very insightful.",
-            "Can I take a look?",
-            "Do not trust him, he is a liar.",
-        ]
-
-        tgt_list = ["That's stupid.", "What's the problem?", "He is trustworthy."]
-
-        print(self.score(src_list, tgt_list, batch_size))
-        print(self.score_src_hyp_long(src_list, tgt_list))
