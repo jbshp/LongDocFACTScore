@@ -8,7 +8,7 @@ from utils.correlations import (
 )
 from utils.metrics import test_huggingface_rouge, test_questeval
 import argparse
-from longdocfactscore import LongDocFACTScore
+from longdocfactscore.ldfacts import LongDocFACTScore
 from utils.preprocess import clean_abstract
 from BARTScore.bart_score import BARTScorer
 from bert_score.scorer import BERTScorer
@@ -18,7 +18,13 @@ import subprocess
 import time
 import os
 import seaborn as sb
+import torch
 
+
+if torch.cuda.is_available():
+    device = "cuda:0"
+else:
+    device = "cpu"
 
 def timeit(func):
     def wrapper(*arg, **kw):
@@ -31,9 +37,9 @@ def timeit(func):
 
 
 # load models
-ldfacts_scorer = LongDocFACTScore(checkpoint="facebook/bart-large")
-bart_scorer = BARTScorer(checkpoint="facebook/bart-large", device="cpu")
-bert_scorer = BERTScorer("bert-base-uncased", device="cpu")
+ldfacts_scorer = LongDocFACTScore(device=device)
+bart_scorer = BARTScorer(checkpoint="facebook/bart-large", device=device)
+bert_scorer = BERTScorer("bert-base-uncased", device=device)
 
 # args
 parser = argparse.ArgumentParser()
