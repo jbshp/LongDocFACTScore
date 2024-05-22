@@ -1,3 +1,4 @@
+absl-py==2.1.0
 aiohttp==3.9.5
 aiosignal==1.3.1
 annotated-types==0.7.0
@@ -35,7 +36,6 @@ joblib==1.4.2
 kiwisolver==1.4.5
 langcodes==3.4.0
 language_data==1.2.0
--e git+https://github.com/jbshp/LongDocFACTScore.git@a5a6ce2d089f5dc6d78251d6fa405f9803bfc6d6#egg=longdocfactscore
 marisa-trie==1.1.1
 MarkupSafe==2.1.5
 matplotlib==3.9.0
@@ -67,6 +67,7 @@ pytz==2024.1
 PyYAML==6.0.1
 regex==2024.5.15
 requests==2.32.2
+rouge_score==0.1.2
 safetensors==0.4.3
 scikit-learn==1.5.0
 scipy==1.13.0
