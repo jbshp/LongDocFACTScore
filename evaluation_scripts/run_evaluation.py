@@ -51,78 +51,6 @@ parser.add_argument(
 args = parser.parse_args()
 
 
-def calculate_inter_annotator_agreement_factuality(data_frames):
-    num_subjects = len(data_frames[0])
-    model_nums = ["1", "2", "3"]
-    sent_nums = ["1", "2", "3"]
-    M = np.zeros(shape=(135, 2))
-
-    # each annotator has a dataframe
-    for df in data_frames:
-        start_idx = 0
-
-        #  we treat each model as a new sample
-        for model_num in model_nums:
-            # we treat each sentence as a new sample
-            for sent_num in sent_nums:
-                for idx, row in df.iterrows():
-                    score = row[f"model_{model_num}_sent_{sent_num}_factuality"]
-                    overall_idx = idx + start_idx
-                    if np.isnan(score):
-                        print("nan!")
-                    else:
-                        M[overall_idx, int(score)] += 1
-
-                start_idx += num_subjects
-    return fleiss_kappa(M)
-
-
-def calculate_inter_annotator_agreement_fluency_coherence(data_frames, col="coherence"):
-    num_subjects = len(df_1)
-    num_categories = np.max(df_1[f"model_1_{col}"])
-    model_nums = ["1", "2", "3"]
-    M = np.zeros(shape=(num_subjects * len(model_nums), num_categories))
-    for df in data_frames:
-        start_idx = 0
-        for model_num in model_nums:
-            for idx, row in df.iterrows():
-                rank = row[f"model_{model_num}_{col}"]
-                M[idx + start_idx, rank - 1] += 1
-            start_idx += num_subjects
-    return M
-
-
-def calculate_inter_annotator_agreement_fluency_coherence_krippendorff(
-    data_frames, col="coherence"
-):
-    model_nums = ["1", "2", "3"]
-    all_scores = []
-    for df in data_frames:
-        annotator_scores = []
-        for model_num in model_nums:
-            for idx, row in df.iterrows():
-                rank = row[f"model_{model_num}_{col}"]
-                annotator_scores.append(rank)
-        all_scores.append(annotator_scores)
-    return krippendorff_alpha(all_scores, interval_metric)
-
-
-def calculate_inter_annotator_agreement_factuality_krippendorff(data_frames):
-    model_nums = ["1", "2", "3"]
-    sent_nums = ["1", "2", "3"]
-    all_scores = []
-    for df in data_frames:
-        annotator_scores = []
-        for model_num in model_nums:
-            for sent_num in sent_nums:
-                for idx, row in df.iterrows():
-                    score = row[f"model_{model_num}_sent_{sent_num}_factuality"]
-                    if not np.isnan(score):
-                        annotator_scores.append(score)
-        all_scores.append(annotator_scores)
-    return krippendorff_alpha(all_scores, interval_metric)
-
-
 def load_dataframes(dataset):
     if dataset == "arxiv_longdocfactscore":
         df_1 = pd.read_csv(
@@ -269,7 +197,7 @@ def create_data_file_factcc(df, model, col_output):
                 dict_ = {
                     "claim": sent,
                     "id": row["id"],
-                    "label": "CORRECT",
+                    "label": "CORRECT", # this needs to be here for their code to work but whether we state CORRECT or INCORRECT doesn't matter for our purposes.
                     "text": row["article"],
                 }
                 data_gen.append(dict_)
@@ -279,7 +207,7 @@ def create_data_file_factcc(df, model, col_output):
     subprocess.run(
         [
             "python",
-            "src/factCC/modeling/run.py",
+            "evaluation_scripts/factCC/modeling/run.py",
             "--task_name",
             "factcc_annotated",
             "--do_eval",
@@ -347,6 +275,7 @@ def update_df_with_metric_scores(
     print(f"calculating metrics for {metric_name}")
     output_cols = [f"model_{idx+1}_{metric_name}" for idx, model in enumerate(src_cols)]
     for src, output_col in zip(src_cols, output_cols):
+        print(f"     Calculating output for {output_col}")
         if switch_tgt == True:
             df = metric_function(df, tgt_col, output_col, src)
         else:
