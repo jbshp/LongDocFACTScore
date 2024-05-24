@@ -24,7 +24,7 @@ In our work, we curate LongSciVerify data set consisting of PubMed and ArXiv pap
 
 To run on a piece of text:
 ```
-from longdocfactscore import LongDocFACTScore
+from longdocfactscore.ldfacts import LongDocFACTScore
 
 predict_summary = "INSERT PREDICTED SUMMARY HERE"
 src_doc = "INSERT SOURCE DOCUMENT HERE"
