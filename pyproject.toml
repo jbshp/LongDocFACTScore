@@ -1,0 +1,25 @@
+[project]
+name = "longdocfactscore"
+version = "0.0.1"
+authors = [
+  { name="Jennifer A Bishop" },
+]
+description = "LongDocFACTScore: A framework for evaluating factual consistency of long document abstractive summarisation and the LongSciVerify data set"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "nltk",
+    "numpy",
+    "sentence-transformers",
+    "torch",
+    "transformers",
+    "pandas"
+]
+[project.urls]
+Homepage = "https://github.com/jbshp/LongDocFACTScore"
+Issues = "https://github.com/jbshp/LongDocFACTScore/issues"

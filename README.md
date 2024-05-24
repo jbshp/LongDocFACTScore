@@ -11,26 +11,58 @@ Maintaining factual consistency is a critical issue in abstractive text summaris
 
 LongDocFACTScore is a reference-free framework which can be applied to any reference-free metric for assessing factual consistency. In this repo, it is implemented with BARTScore. The method uses sentence embeddings to calculate similarity between source document sentences and predicted summary sentences, and then applies metrics to the highest similarity text snippets. The scores per sentence in the predicted summary are averaged to give one score per predicted summary. 
 
+In this work, LongDocFACTScore is implemented with [BARTScore](https://github.com/neulab/BARTScore), and some code is copied from the linked repo. 
+
 <img src="ldfacts.png" width="400">
 
 
+### Data sets (including LongSciVerify)
 
-### Usage
+In our work, we curate LongSciVerify data set consisting of PubMed and ArXiv papers with human annotations of factual consistency. More information about the data sets we use can be found [here](./data/README.md)
+
+### Usage of LongDocFACTScore
 
 To run on a piece of text:
 ```
-from src.ldfacts import LDFACTS
+from longdocfactscore import LongDocFACTScore
 
 predict_summary = "INSERT PREDICTED SUMMARY HERE"
 src_doc = "INSERT SOURCE DOCUMENT HERE"
 
-ldfacts_scorer = LDFACTS(device='cpu')
+ldfacts_scorer = LongDocFACTScore(device='cpu')
 
 scores = ldfacts_scorer.score_src_hyp_long([src_doc],[predict_summary])
 ```
 
 To run with some example data:
 ```bash
-pip install -r requirements.txt
+pip install -e . 
 python run_example.py
 ```
+
+
+
+### Repeat evaluation in LongDocFACTScore paper
+
+#### Set up 
+
+1. Run the following
+```bash
+pip install -e .
+cd evaluation_scripts
+git clone https://github.com/ThomasScialom/QuestEval.git
+git clone https://github.com/neulab/BARTScore.git
+git clone https://github.com/salesforce/factCC.git 
+cp ./utils/factcc_run.py ./factCC/modeling/run.py
+pip install -r requirements.txt
+```
+2. Download the factCC trained checkpoint for evaluation and copy into the top level of this repo in a folder called `factcc-checkpoint`
+3. Run scripts, dataset options are: `pubmed_longdocfactscore` , `arxiv_longdocfactscore`, `pubmed_longdocfactscore` 
+
+e.g., 
+
+```bash 
+cd ..
+python evaluation_scripts/run_evaluation.py --dataset pubmed_longdocfactscore
+```
+
