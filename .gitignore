@@ -129,9 +129,9 @@ dmypy.json
 .pyre/
 
 # other repos
-src/BARTScore/
-src/QuestEval/
-src/factCC/
+evaluation_scripts/BARTScore/
+evaluation_scripts/QuestEval/
+evaluation_scripts/factCC/
 data/formatted_for_factcc/
 wandb/
 factcc-checkpoint/
