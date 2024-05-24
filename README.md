@@ -22,8 +22,18 @@ In our work, we curate LongSciVerify data set consisting of PubMed and ArXiv pap
 
 ### Usage of LongDocFACTScore
 
-To run on a piece of text:
+Install:
 ```
+pip install longdocfactscore
+```
+or for an editable version
+```
+git clone https://github.com/jbshp/LongDocFACTScore.git
+pip install -e . 
+```
+
+To run on a piece of text:
+```python
 from longdocfactscore.ldfacts import LongDocFACTScore
 
 predict_summary = "INSERT PREDICTED SUMMARY HERE"
@@ -36,7 +46,6 @@ scores = ldfacts_scorer.score_src_hyp_long([src_doc],[predict_summary])
 
 To run with some example data:
 ```bash
-pip install -e . 
 python run_example.py
 ```
 
@@ -48,7 +57,7 @@ python run_example.py
 
 1. Run the following
 ```bash
-pip install -e .
+pip install longdocfactscore
 cd evaluation_scripts
 git clone https://github.com/ThomasScialom/QuestEval.git
 git clone https://github.com/neulab/BARTScore.git

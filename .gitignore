@@ -135,3 +135,7 @@ evaluation_scripts/factCC/
 data/formatted_for_factcc/
 wandb/
 factcc-checkpoint/
+
+
+# pypi
+.pypirc
