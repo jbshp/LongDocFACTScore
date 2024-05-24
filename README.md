@@ -56,7 +56,7 @@ git clone https://github.com/salesforce/factCC.git
 cp ./utils/factcc_run.py ./factCC/modeling/run.py
 pip install -r requirements.txt
 ```
-2. Download the factCC trained checkpoint for evaluation and copy into the top level of this repo in a folder called `factcc-checkpoint`
+2. Download the factCC trained checkpoint from their [repo](https://github.com/salesforce/factCC?tab=readme-ov-file) for evaluation and copy into the top level of this repo in a folder called `factcc-checkpoint`
 3. Run scripts, dataset options are: `pubmed_longdocfactscore` , `arxiv_longdocfactscore`, `pubmed_longdocfactscore` 
 
 e.g., 
