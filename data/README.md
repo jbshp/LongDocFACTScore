@@ -18,7 +18,7 @@ model_3 = ZONESumm
 
 ### LongEval
 
-We have pre-processed the LongEval PubMed data set to made it work with our scripts. Similarly to LongSciVerify, the raw articles can be found in `./data/raw_data/LongEval` and the human annotations in `./data/human_eval_results/LongEval`.
+We have pre-processed the LongEval PubMed data set to made it work with our scripts. This data was originally published as part of [LONGEVAL: Guidelines for Human Evaluation of Faithfulness in Long-form Summarization by Krishna et al., (2023)](https://aclanthology.org/2023.eacl-main.121/). Links to their original data can be found [here](https://github.com/martiansideofthemoon/longeval-summarization). The  Similarly to LongSciVerify, the raw articles can be found in `./data/raw_data/LongEval` and the human annotations in `./data/human_eval_results/LongEval`.
 
 
 ### Inter-Annotator Agreement calculations
