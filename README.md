@@ -13,7 +13,7 @@ LongDocFACTScore is a reference-free framework which can be applied to any refer
 
 In this work, LongDocFACTScore is implemented with [BARTScore](https://github.com/neulab/BARTScore), and some code is copied from the linked repo. 
 
-<img src="ldfacts.png" width="400">
+![longdocfactscore.png](https://github.com/jbshp/LongDocFACTScore/blob/main/ldfacts.png?raw=True)
 
 
 ### Data sets (including LongSciVerify)
