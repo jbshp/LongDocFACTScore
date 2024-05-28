@@ -1,3 +1,7 @@
+# Suppress annoying warnings from this issue which cannot be solved: https://github.com/joblib/threadpoolctl/blob/master/multiple_openmp.md and transformers packages
+import warnings
+warnings.filterwarnings("ignore")
+
 import torch
 import torch.nn as nn
 import traceback
@@ -5,9 +9,6 @@ from transformers import BartTokenizer, BartForConditionalGeneration
 import numpy as np
 from nltk import sent_tokenize
 from sentence_transformers import SentenceTransformer, util
-import warnings
-
-warnings.filterwarnings("ignore")
 
 class LongDocFACTScore():
     def __init__(self, device="cuda:0", model="BARTScore"):
