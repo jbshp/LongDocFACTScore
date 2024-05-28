@@ -5,7 +5,9 @@ from transformers import BartTokenizer, BartForConditionalGeneration
 import numpy as np
 from nltk import sent_tokenize
 from sentence_transformers import SentenceTransformer, util
+import warnings
 
+warnings.filterwarnings("ignore")
 
 class LongDocFACTScore():
     def __init__(self, device="cuda:0", model="BARTScore"):
